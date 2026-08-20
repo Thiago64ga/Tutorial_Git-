@@ -1,166 +1,208 @@
 # README de commits e boas praticas de versionamento
 
-Este guia explica como fazer commits melhores e manter um historico de versoes organizado.
+Este guia mostra, de forma simples e visual, como fazer bons commits e manter o historico do projeto organizado.
 
-## O que e um commit
+Use este arquivo como uma cola de consulta enquanto trabalha com Git e GitHub.
 
-Um commit e um registro de uma alteracao no projeto.
+## Mapa rapido
 
-Pense nele como um ponto salvo na historia do codigo. Se algo der errado depois, os commits ajudam a entender o que mudou e quando mudou.
-
-## Fluxo basico para fazer commit
-
-Antes de fazer commit, veja o que foi alterado:
-
-```bash
+```text
+Alterei arquivos
+      |
+      v
+Vejo o que mudou
 git status
-```
-
-Prepare os arquivos:
-
-```bash
+      |
+      v
+Escolho o que vai entrar no commit
 git add .
-```
-
-Crie o commit:
-
-```bash
-git commit -m "mensagem explicando a alteracao"
-```
-
-Envie para o GitHub:
-
-```bash
+      |
+      v
+Salvo a versao no Git
+git commit -m "mensagem clara"
+      |
+      v
+Envio para o GitHub
 git push
 ```
 
-## Como escrever uma boa mensagem de commit
+## O que e um commit
 
-Uma boa mensagem deve dizer claramente o que foi feito.
+Um commit e um ponto salvo na historia do projeto.
 
-Exemplos bons:
+Imagine uma linha do tempo:
 
-```bash
-git commit -m "cria estrutura inicial do projeto"
-git commit -m "adiciona estilos da pagina principal"
-git commit -m "corrige erro no menu de navegacao"
-git commit -m "atualiza README com instrucoes de uso"
+```text
+Projeto vazio
+    |
+    v
+Commit 1: cria arquivos iniciais
+    |
+    v
+Commit 2: adiciona estilos
+    |
+    v
+Commit 3: corrige botao
 ```
 
-Exemplos ruins:
+Cada commit deve representar uma alteracao pequena e facil de entender.
+
+## Comandos principais
+
+| Comando | Para que serve |
+| --- | --- |
+| `git status` | Mostra arquivos alterados, novos ou apagados. |
+| `git add .` | Prepara todas as alteracoes para o commit. |
+| `git add nome-do-arquivo` | Prepara apenas um arquivo especifico. |
+| `git commit -m "mensagem"` | Cria um commit com uma mensagem. |
+| `git push` | Envia os commits para o GitHub. |
+| `git pull` | Baixa alteracoes que estao no GitHub. |
+| `git log --oneline` | Mostra o historico de commits resumido. |
+
+## Fluxo basico para fazer commit
+
+Use este passo a passo no dia a dia:
 
 ```bash
-git commit -m "coisas"
-git commit -m "alteracoes"
-git commit -m "final"
-git commit -m "teste"
+git status
+git add .
+git status
+git commit -m "mensagem explicando a alteracao"
+git push
 ```
+
+Por que tem `git status` duas vezes?
+
+```text
+Primeiro git status  -> vejo o que mudou
+Segundo git status   -> confiro o que esta pronto para commit
+```
+
+## Mensagem de commit: boa x ruim
+
+Uma boa mensagem responde:
+
+```text
+O que eu mudei?
+```
+
+| Mensagem ruim | Problema | Mensagem melhor |
+| --- | --- | --- |
+| `coisas` | Nao explica nada. | `cria estrutura inicial do projeto` |
+| `teste` | Nao diz o que foi testado. | `testa envio do formulario` |
+| `final` | Nao mostra o que terminou. | `finaliza pagina de contato` |
+| `alteracoes` | Muito generica. | `atualiza textos do README` |
+| `arruma` | Nao diz o que foi corrigido. | `corrige link do menu principal` |
 
 ## Padrao simples recomendado
 
-Use verbos no presente:
+Comece a mensagem com um verbo no presente:
 
-- `cria`
-- `adiciona`
-- `corrige`
-- `remove`
-- `atualiza`
-- `organiza`
-- `melhora`
+| Verbo | Quando usar | Exemplo |
+| --- | --- | --- |
+| `cria` | Algo novo foi criado. | `cria pagina inicial` |
+| `adiciona` | Algo foi acrescentado. | `adiciona estilos do menu` |
+| `corrige` | Um erro foi resolvido. | `corrige cor do botao` |
+| `remove` | Algo foi apagado. | `remove codigo nao usado` |
+| `atualiza` | Algo existente mudou. | `atualiza README do projeto` |
+| `organiza` | Arquivos ou codigo foram arrumados. | `organiza arquivos de estilo` |
+| `melhora` | Algo ficou melhor, mas nao era erro. | `melhora layout da pagina` |
 
-Exemplos:
+Exemplos prontos:
 
 ```bash
 git commit -m "cria pagina de contato"
 git commit -m "adiciona validacao do formulario"
-git commit -m "corrige cor do botao principal"
-git commit -m "remove codigo nao utilizado"
-git commit -m "atualiza textos do README"
+git commit -m "corrige link do menu"
+git commit -m "remove arquivo temporario"
+git commit -m "atualiza instrucoes do README"
 ```
 
 ## Commits pequenos sao melhores
 
-Evite colocar muitas alteracoes diferentes no mesmo commit.
+Pense no commit como uma caixa. Cada caixa deve guardar um assunto.
 
-Melhor:
-
-```text
-Commit 1: cria pagina inicial
-Commit 2: adiciona estilos da pagina inicial
-Commit 3: corrige link do botao
-```
-
-Pior:
+Bom:
 
 ```text
-Commit unico: cria pagina, muda estilo, corrige link, altera README e remove arquivo
+[Commit 1] cria pagina inicial
+[Commit 2] adiciona estilos da pagina inicial
+[Commit 3] corrige link do botao
 ```
 
-Commits pequenos ajudam a entender o historico e facilitam corrigir erros.
+Ruim:
+
+```text
+[Commit unico] cria pagina, muda estilo, corrige link, altera README e remove arquivo
+```
+
+Por que separar?
+
+- fica mais facil entender o historico;
+- fica mais facil achar onde um erro apareceu;
+- fica mais facil explicar o que foi feito;
+- fica mais facil desfazer uma mudanca especifica.
 
 ## Quando fazer commit
 
 Faca commit quando terminar uma parte pequena e funcional.
 
-Bons momentos para commitar:
+| Momento | Exemplo de mensagem |
+| --- | --- |
+| Criou um arquivo importante. | `cria arquivo index.html` |
+| Terminou uma tela. | `cria pagina de login` |
+| Corrigiu um erro. | `corrige erro no formulario` |
+| Atualizou documentacao. | `atualiza guia de instalacao` |
+| Organizou arquivos. | `organiza estrutura de pastas` |
+| Testou e esta funcionando. | `finaliza validacao do cadastro` |
 
-- depois de criar um arquivo importante;
-- depois de terminar uma tela;
-- depois de corrigir um erro;
-- depois de atualizar a documentacao;
-- antes de tentar uma mudanca grande;
-- depois de testar e ver que esta funcionando.
-
-Evite fazer commit com codigo quebrado, a menos que seja uma branch de teste e voce saiba o que esta fazendo.
+Evite fazer commit com o projeto quebrado. Se precisar salvar uma tentativa, use uma branch separada.
 
 ## Antes de commitar
 
-Confira:
+Use este checklist:
+
+```text
+[ ] Salvei os arquivos no editor?
+[ ] O projeto ainda funciona?
+[ ] Rodei git status?
+[ ] A mensagem explica o que mudou?
+[ ] Estou commitando apenas arquivos relacionados?
+[ ] Nao estou enviando senha, token ou arquivo pessoal?
+```
+
+Comandos para conferir:
 
 ```bash
 git status
-```
-
-Veja se os arquivos listados fazem sentido.
-
-Se quiser ver detalhes das mudancas:
-
-```bash
 git diff
 ```
 
-Depois prepare os arquivos:
+Depois:
 
 ```bash
 git add .
-```
-
-Confira novamente:
-
-```bash
 git status
-```
-
-Entao faca o commit:
-
-```bash
 git commit -m "mensagem clara"
 ```
 
-## Nao coloque arquivos desnecessarios no commit
+## O que nao deve ir para um commit
 
 Evite commitar:
 
-- senhas;
-- chaves de API;
-- arquivos pessoais;
-- arquivos temporarios;
-- arquivos muito grandes sem necessidade;
-- pastas de dependencias, como `node_modules`.
+| Tipo de arquivo | Motivo |
+| --- | --- |
+| Senhas | Pode expor dados importantes. |
+| Chaves de API | Outra pessoa pode usar sua chave. |
+| Arquivos pessoais | Nao fazem parte do projeto. |
+| Arquivos temporarios | Sujam o historico. |
+| Arquivos muito grandes | Deixam o repositorio pesado. |
+| `node_modules/` | Pode ser recriado com instalacao de dependencias. |
+| `.env` | Normalmente guarda dados secretos. |
 
-Para ignorar arquivos, use um arquivo chamado `.gitignore`.
+Para ignorar arquivos, crie um arquivo chamado `.gitignore`.
 
-Exemplo de `.gitignore`:
+Exemplo:
 
 ```gitignore
 node_modules/
@@ -172,87 +214,124 @@ node_modules/
 
 Versionamento e o controle da evolucao do projeto.
 
-Com ele, voce consegue:
+Ele ajuda a responder perguntas como:
 
-- ver o historico de alteracoes;
-- voltar para uma versao anterior;
-- trabalhar com outras pessoas;
-- testar ideias em branches;
-- entender quem alterou cada parte do projeto.
+```text
+O que mudou?
+Quando mudou?
+Quem mudou?
+Por que mudou?
+Como voltar para uma versao anterior?
+```
+
+## Exemplo visual de historico
+
+```text
+main
+ |
+ |-- cria estrutura inicial
+ |
+ |-- adiciona estilos
+ |
+ |-- cria script principal
+ |
+ |-- corrige erro no botao
+ |
+ |-- atualiza README
+```
+
+Um historico assim e facil de ler porque cada commit tem um objetivo claro.
 
 ## Boas praticas de versionamento
 
-1. Faca commits pequenos e frequentes.
-2. Use mensagens claras.
-3. Teste antes de commitar.
-4. Use branches para mudancas grandes.
-5. Atualize o repositorio antes de comecar a trabalhar.
-6. Envie seus commits para o GitHub com frequencia.
-7. Nao misture assuntos diferentes no mesmo commit.
+| Boa pratica | Por que ajuda |
+| --- | --- |
+| Fazer commits pequenos. | Facilita entender e corrigir problemas. |
+| Usar mensagens claras. | Deixa o historico legivel. |
+| Testar antes de commitar. | Evita salvar codigo quebrado. |
+| Usar branches para mudancas grandes. | Permite testar sem baguncar a `main`. |
+| Dar `git pull` antes de trabalhar. | Evita conflito com alteracoes novas. |
+| Dar `git push` com frequencia. | Mantem backup no GitHub. |
+| Nao misturar assuntos. | Cada commit fica mais facil de revisar. |
 
 ## Fluxo recomendado para trabalhar sozinho
 
-Antes de comecar:
-
-```bash
-git status
+```text
+Comecar o dia
+    |
+    v
 git pull
+    |
+    v
+Editar arquivos
+    |
+    v
+git status
+    |
+    v
+git add .
+    |
+    v
+git commit -m "mensagem clara"
+    |
+    v
+git push
 ```
 
-Durante o trabalho:
+Comandos:
 
 ```bash
+git pull
 git status
 git add .
 git commit -m "descreva a alteracao"
-```
-
-Ao terminar:
-
-```bash
 git push
 ```
 
 ## Fluxo recomendado para trabalhar em grupo
 
-Antes de comecar:
+Quando mais pessoas trabalham no mesmo projeto, use branch.
+
+```text
+main
+ |
+ |-------------------------
+ |                        |
+ v                        v
+codigo principal       minha-branch
+                         |
+                         v
+                    meus commits
+                         |
+                         v
+                    Pull Request
+                         |
+                         v
+                        main
+```
+
+Comandos:
 
 ```bash
 git pull
-git status
-```
-
-Crie uma branch:
-
-```bash
 git checkout -b nome-da-sua-alteracao
-```
-
-Faca commits normalmente:
-
-```bash
 git add .
 git commit -m "mensagem clara"
-```
-
-Envie a branch:
-
-```bash
 git push -u origin nome-da-sua-alteracao
 ```
 
 Depois abra um Pull Request no GitHub para juntar sua branch com a `main`.
 
-## Exemplo de nomes de branch
+## Nomes de branch
 
-Use nomes simples e descritivos:
+Use nomes simples e descritivos.
 
-```text
-pagina-inicial
-formulario-contato
-corrige-menu
-atualiza-readme
-```
+| Bom nome | Quando usar |
+| --- | --- |
+| `pagina-inicial` | Criacao ou alteracao da pagina inicial. |
+| `formulario-contato` | Trabalho no formulario de contato. |
+| `corrige-menu` | Correcao no menu. |
+| `atualiza-readme` | Alteracao na documentacao. |
 
 Evite:
 
@@ -261,27 +340,47 @@ teste
 coisas
 nova
 abc
+branch1
 ```
 
-## Checklist antes do commit
+## Exemplo completo comentado
 
-Antes de fazer commit, pergunte:
+```bash
+# mostra o que foi alterado
+git status
 
-- O codigo esta salvo?
-- O projeto ainda funciona?
-- A mensagem do commit explica o que mudou?
-- Estou commitando apenas arquivos relacionados?
-- Nao estou enviando senha ou arquivo pessoal?
+# prepara todas as alteracoes
+git add .
 
-## Exemplo completo
+# confere se esta tudo pronto
+git status
+
+# cria o commit
+git commit -m "adiciona guia de boas praticas de commits"
+
+# envia para o GitHub
+git push
+```
+
+## Cola final
+
+Se estiver com duvida, siga este mini roteiro:
+
+```text
+1. Salvei os arquivos?
+2. Rodei git status?
+3. As mudancas fazem sentido juntas?
+4. Rodei git add .?
+5. Escrevi uma mensagem clara?
+6. Rodei git push?
+```
+
+Comando mais usado:
 
 ```bash
 git status
 git add .
-git status
-git commit -m "adiciona guia de boas praticas de commits"
+git commit -m "mensagem clara"
 git push
 ```
-
-Esse e um bom fluxo para usar no dia a dia.
 
